@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset=utf-8>
+    <title>A simple HTML5 page layout</title>
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400, 600' rel='stylesheet' type='text/css'>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome.css">
+
+    <style>
+      * {
+		 font-family: "Open Sans", sans-serif;
+      }
+      body { margin:1em; }
+      code, pre {
+      	font-family: "PT mono" sans-serif;
+      	-moz-tab-size: 1;
+      	-webkit-tab-size: 1;
+	    -o-tab-size:   1;
+	    tab-size:      1;
+      }
+      .nav {
+      	font-family: "Open Sans", sans-serif;
+      	font-size: 1.5em;
+      	font-weight: 300;
+      	display: inline-block;
+		margin-top: .5em;
+      }
+      .nav a {
+ 		margin-right: 1em;
+      } 
+      article {
+      	column-count: 3;
+      	-moz-column-count: 3;
+      	-webkit-column-count: 3;
+		-moz-column-gap: 3em;
+      	-webkit-column-gap:3em;
+      	column-gap: 3em;
+      }
+      h1, h2, h3, h4 {
+      	font-weight: 400;
+      }
+      footer {
+      	background-color: rgba(0,136,204, 0.05);
+      }
+      .firstpar {
+      	font-style: italic;
+      }
+      .logo {
+		font-size: 1.5em;
+		margin-left: 0;
+      }
+      .specialSection {
+      	background-color: rgba(0,136,204, 0.05);
+      	padding: 1em;
+      	border: 2px #0088cc solid;
+      	padding-bottom: .5em;
+      }
+      .specialSection h3 {
+      	margin-top: -.5em;
+      	margin-bottom: .5em;
+      }
+      .comments {
+      	column-count: 2;
+      	-webkit-column-count: 3;
+      }
+      .comment {
+      	background-color: rgba(0,136,204,0.05);
+		column-break-inside: avoid;  	
+		display: inline-block; 	
+		width: 100%;
+      }
+      .commentHeader {
+      	background-color: rgba(0,136,204,0.2);
+      	font-size: 75%;
+      	padding: .205;
+      }
+      .commenterName {
+      	font-weight:600;
+      	color: rgba(0, 136, 204, 1.0);
+      	font-size: 125%;
+      }
+      .commentNumber {
+      	font-weight: 600;
+      	font-size:125%;
+      }
+      .commentContent {
+      	padding: .25em;
+      }
+      .commentControls {
+      	float: right;
+      	font-size: 125%;
+      }
+      .comment-like-heart {
+      	
+      }
+      .cclogo {
+      	
+      }
+      .copyright {
+      	font-family: "inconsolata", sans-serif;
+      	font-size: 32px;
+      	vertical-align: -25%;
+      }
+    </style>
+	</head>
+  <body>
+  	<div class=nav>
+  	  <a href="#" class=logo><strong>R</strong>uud <strong>P</strong>outsma</a>
+	      <a href="/projects/"><span class=icon-folder-open></span> projects</a>
+	      <a href="/blog"><span class=icon-book></span> blog</a>
+	      <a href="/articles" class="active"><span class=icon-pencil></span> articles</a>
+	      <a href="/about"><span class=icon-user></span> about</a>
+	  </ul>
+    </div>
+    <header>
+      <h2 id=status>Articles - SomeTitle</h2>
+    </header>
+    <article>
+        <h3>Article 1 heading</h3>
+        <p class=firstpar>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <h2>Article 1 sub-heading</h2>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <pre class="brush: php; highlight: [5, 15]; html-script: true">
+if (thing) {
+  doSomething();
+}</pre>	
+      <section>
+        <h3>Section 1 heading</h3>
+      </section>
+    </article>
+    <article>
+      <header>
+        <h1>Article 2 heading</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </header>
+      <section>
+        <h2>Section 1 heading</h2>
+        <p>Lorem Ipsum is simply <a href="#">dummy link</a> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <div class=specialSection><h3>Special</h3><p>This is a special section with content emphasizing some stuff to explain further. </p></div>
+      </section>
+    </article>
+    <!--
+    <div class=comments>
+		  <div class=comment>
+		    <div class="commentHeader">
+		    	<span class="commentNumber">1</span>
+			    <span class="icon-comment"></span>
+			  	 <span class=commenterName>Cheetah</span> said 5 days ago: 
+		    </div>
+		    <div class=commentContent>
+		    	<p> Woei! Ik mag ook wat zeggen :) </p>
+		    </div>
+		  </div>
+		  <div class=comment>
+		    <div class="commentHeader">
+		    	<span class="commentNumber">10</span>
+			    <span class="icon-comment"></span>
+			  	<span class=commenterName>Cheetah</span> said 5 days ago: 
+			  	<div class="commentControls">
+			  		<span class=icon-exclamation-sign></span>
+			  		<span class=icon-edit></span>
+			  		<a href="#" class=comment-like-heart><span class="icon-heart-empty"></span></a> 
+			    </div>
+		    </div>
+		    <div class=commentContent>
+		    	<p> Woei! Ik mag ook wat zeggen :) </p>
+		    	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		    </div>
+		  </div>
+    </div>
+    -->
+    <footer>
+      <p><a href="http://creativecommons.org/licenses/by/3.0/"><img src ="img/cc22.png"><img src="img/by22.png"></a> <span class=copyright>&#169;</span> Ruud Poutsma and <a href="/attribution/">many others</a></p>
+    </footer>
+    <script type="application/dart" src="Drop.dart"></script>
+    <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+  </body>	
+</html>
+
