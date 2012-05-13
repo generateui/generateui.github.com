@@ -1,0 +1,100 @@
+      * {
+		 font-family: "Open Sans", sans-serif;
+      }
+      html {
+      }
+      body { 
+      	margin:1em; 
+      	min-height: 100%;
+      }
+      code, pre {
+      	font-family: "PT mono" sans-serif;
+      	-moz-tab-size: 1;
+      	-webkit-tab-size: 1;
+	    -o-tab-size:   1;
+	    tab-size:      1;
+      }
+      .nav {
+      	font-family: "Open Sans", sans-serif;
+      	font-size: 1.5em;
+      	font-weight: 300;
+      	display: inline-block;
+		margin-top: .5em;
+      }
+      .nav a {
+ 		margin-right: 1em;
+      } 
+      article {
+      	column-count: 3;
+      	-moz-column-count: 3;
+      	-webkit-column-count: 3;
+		-moz-column-gap: 3em;
+      	-webkit-column-gap:3em;
+      	column-gap: 3em;
+      }
+      h1, h2, h3, h4 {
+      	font-weight: 400;
+      }
+      footer {
+      	background-color: rgba(0,136,204, 0.05);
+      	float: bottom;
+      }
+      .firstpar {
+      	font-style: italic;
+      }
+      .logo {
+		font-size: 1.5em;
+		margin-left: 0;
+      }
+      .specialSection {
+      	background-color: rgba(0,136,204, 0.05);
+      	padding: 1em;
+      	border: 2px #0088cc solid;
+      	padding-bottom: .5em;
+      }
+      .specialSection h3 {
+      	margin-top: -.5em;
+      	margin-bottom: .5em;
+      }
+      .comments {
+      	column-count: 2;
+      	-webkit-column-count: 3;
+      }
+      .comment {
+      	background-color: rgba(0,136,204,0.05);
+		column-break-inside: avoid;  	
+		display: inline-block; 	
+		width: 100%;
+      }
+      .commentHeader {
+      	background-color: rgba(0,136,204,0.2);
+      	font-size: 75%;
+      	padding: .205;
+      }
+      .commenterName {
+      	font-weight:600;
+      	color: rgba(0, 136, 204, 1.0);
+      	font-size: 125%;
+      }
+      .commentNumber {
+      	font-weight: 600;
+      	font-size:125%;
+      }
+      .commentContent {
+      	padding: .25em;
+      }
+      .commentControls {
+      	float: right;
+      	font-size: 125%;
+      }
+      .comment-like-heart {
+      	
+      }
+      .cclogo {
+      	
+      }
+      .copyright {
+      	font-family: "inconsolata", sans-serif;
+      	font-size: 32px;
+      	vertical-align: -25%;
+      }
