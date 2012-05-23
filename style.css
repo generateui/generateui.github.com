@@ -75,7 +75,7 @@ footer {
 	border: 2px #0088cc solid;
 	padding-bottom: .5em;
 }
-.specialSection h3 {
+.specialSection h3, h4 {
 	margin-top: -.5em;
 	margin-bottom: .5em;
 }
