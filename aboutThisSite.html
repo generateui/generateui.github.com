@@ -1,0 +1,31 @@
+<article>
+  <section>
+    <h2>About this site</h2>
+    <p>This is a simple <a href="http://en.wikipedia.org/wiki/Content_management_system">CMS</a> designed for me personally. 
+    <h3>Requirements</h3>
+    <ul>
+    	<li>Support listings of content (articles, projects, blogposts)</li>
+    	<li>No serverside technology</li>
+    	<li>Html5 is the <strong>primary</strong> form of information</li>
+    	<li>Git for versioning</li>
+    	<li>Practice what you preach</li>
+    	<li>Simple but very readable/usable design</li>
+    </ul> 
+    <h3>This site (currently) doesn't care much about</h3>
+    <ul>
+    	<li>Primitive browsers (IE, lynx, etc)</li>
+    	<li>SEO</li>
+    	<li>Mobile</li>
+    	<li>Dutch/English translation</li>
+    </ul>
+    <h3>Implementation</h3>
+    <p>Single page webapp where all the logic and styling is referenced, 
+    residing in the index.html file. A #content div is used to place the requested
+    content into when the user navigates. Content is requested using 
+    <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">XHR</a>. View 
+    routering is done using the browsers'
+    hashChanged event. Generation of listing pages is done clientside, using a 
+    simple script scraping the available .html content pages, pdating the listing page
+    based on this infomation.</p>
+  </section>
+</article>
