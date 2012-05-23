@@ -22,17 +22,14 @@
     </style>
 	</head>
   <body>
-  	<div class=nav>
+  	<div class=nav id=nav>
   	  <a href="#" class=logo><strong>R</strong>uud <strong>P</strong>outsma</a>
-	      <a href="/projects/"><span class=icon-folder-open></span> projects</a>
-	      <a href="/blog"><span class=icon-book></span> blog</a>
-	      <a href="/articles" class="active"><span class=icon-pencil></span> articles</a>
-	      <a href="/about"><span class=icon-user></span> about</a>
+	      <a href="#projects/projects"><span class=icon-folder-open></span> projects</a>
+	      <a href="#blog/allPosts"><span class=icon-book></span> blog</a>
+	      <a href="#articles/articles" class="active" id=articleslink><span class=icon-pencil></span> articles</a>
+	      <a href="#about"><span class=icon-user></span> about</a>
 	  </ul>
     </div>
-    <header>
-      <h2 id=status>Articles - SomeTitle</h2>
-    </header>
     <div id=content></div>
     <!--
     <div class=comments>
@@ -64,8 +61,19 @@
 		  </div>
     </div>
     -->
+    <article id=error>
+	  <section>
+	    <h2>Jim, what?!</h2>
+	    <p id=error>Jim... Jim!</p>
+	  </section>
+	</article>
     <footer>
-      <p><a href="http://creativecommons.org/licenses/by/3.0/"><img src ="img/cc22.png"><img src="img/by22.png"></a> <span class=copyright>&#169;</span> Ruud Poutsma and <a href="/attribution/">many others</a></p>
+      <p>
+      	<a href="http://creativecommons.org/licenses/by/3.0/">
+	      	<img src ="img/cc22.png">
+	      	<img src="img/by22.png">
+      	</a> 
+      	<span class=copyright>&#169;</span> Ruud Poutsma and <a href="/attribution/">many others</a></p>
     </footer>
     <script type="application/dart" src="Drop.dart"></script>
     <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
