@@ -8,7 +8,11 @@ body {
 	margin:1em; 
 	min-height: 100%;
 }
-code, pre {
+samp {
+	background: rgba(0,0,0,0.1);
+	padding: 2px;
+}
+code, pre, samp {
 	font-family: "PT mono" sans-serif;
 	-moz-tab-size: 1;
 	-webkit-tab-size: 1;
