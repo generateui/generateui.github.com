@@ -1,10 +1,8 @@
 * {
-font-family: "Open Sans", sans-serif;
+	font-family: "Open Sans", sans-serif;
 }
+
 html {
-}
-p {
-	margin: 0;
 }
 body { 
 	margin:1em; 
@@ -16,6 +14,21 @@ code, pre {
 	-webkit-tab-size: 1;
 	-o-tab-size:   1;
 	tab-size:      1;
+}
+td {
+	min-width: 10em;
+	padding: 0.25em;
+	position:left;
+}
+progress {
+}
+table {
+	margin-left: 1em;
+}
+span {
+	font-family: "Open Sans", sans-serif;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
 }
 #content {
 	margin-left: 2px;
@@ -45,9 +58,9 @@ h1, h2, h3, h4 {
 }
 footer {
 	background-color: rgba(0,136,204, 0.05);
-	float: bottom;
 	padding: 0.5em;
 	margin-top: 2em;
+	
 }
 .firstpar {
 	font-style: italic;
@@ -102,4 +115,13 @@ footer {
 }
 .cclogo {
 	
+}
+.year {
+	font-style: italic;
+}
+.location {
+	
+}
+.organisation {
+	font-weight: 400;
 }
