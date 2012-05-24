@@ -28,6 +28,10 @@ table {
 	margin-left: 1em;
 	max-width: 30em;
 }
+figcaption {
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
 .skillsTable td {
 	min-width: 10em;
 	padding: 0.25em;
@@ -41,7 +45,7 @@ span {
 #content {
 	margin-right: 1em;
 	margin-bottom: 1em;
-	max-width: 40em;
+	max-width: 48em;
 }
 #error {
 	display: none;
@@ -161,4 +165,8 @@ blockquote {
 }
 .organisation {
 	font-weight: 400;
+}
+/* Bootstrap overridden */
+.label {
+	float: right;
 }
