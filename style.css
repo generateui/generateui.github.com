@@ -1,12 +1,15 @@
 * {
 	font-family: "Open Sans", sans-serif;
 }
-
 html {
 }
 body { 
 	margin:1em; 
 	min-height: 100%;
+	font-family: "Open Sans", sans-serif;
+}
+p {
+	font-family: "Open Sans", sans-serif;
 }
 samp {
 	background: rgba(0,0,0,0.1);
@@ -18,9 +21,6 @@ code, pre, samp {
 	-webkit-tab-size: 1;
 	-o-tab-size:   1;
 	tab-size:      1;
-}
-td {
-
 }
 progress {
 }
@@ -59,7 +59,6 @@ span {
 article {
 }
 h1, h2, h3, h4 {
-	font-weight: 400;
 	margin-top: 0.5em;
 }
 h2 {
@@ -67,6 +66,9 @@ h2 {
 	margin-left: -2em;
 	padding-left: 2em;
 	margin-bottom: 0.5em;
+}
+h4, h5, h6 {
+	font-weight: 600;
 }
 footer {
 	background-color: rgba(0,136,204, 0.05);
@@ -76,6 +78,7 @@ footer {
 q, blockquote {
 	background-color: rgba(0,136,204, 0.05);
 	border-left: 0.5em solid rgba(0,136,204, 0.5);
+	font-style: italic;
 }
 blockquote {
 	margin-bottom: 1em;
@@ -89,6 +92,15 @@ blockquote {
 .firstpar {
 	font-style: italic;
 }
+.illustration {
+    display: block;
+    margin: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.25em solid rgba(0,136,204, 1.0);
+    background-color: rgba(0,136,204, 0.1);
+    padding: 0.5em;
+}
 .logo {
 	font-size: 1.5em;
 	margin-left: 0;
@@ -100,7 +112,7 @@ blockquote {
 	padding-bottom: .5em;
 	margin-bottom: .5em;
 }
-.specialSection h3, h4 {
+.specialSection > h3, h4 {
 	margin-top: -.5em;
 	margin-bottom: .5em;
 }
