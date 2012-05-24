@@ -35,7 +35,6 @@ span {
 	margin-right: 0.25em;
 }
 #content {
-	margin-left: 2px;
 	margin-right: 1em;
 	margin-bottom: 1em;
 	max-width: 40em;
@@ -54,17 +53,21 @@ span {
 	margin-right: 1em;
 } 
 article {
-
 }
 h1, h2, h3, h4 {
 	font-weight: 400;
 	margin-top: 0.5em;
 }
+h2 {
+	background: rgba(0,136,204,0.1);
+	margin-left: -2em;
+	padding-left: 2em;
+	margin-bottom: 0.5em;
+}
 footer {
 	background-color: rgba(0,136,204, 0.05);
 	padding: 0.5em;
 	margin-top: 2em;
-	
 }
 .screenshot {
 	margin: 1em;
