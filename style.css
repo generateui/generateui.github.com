@@ -20,14 +20,18 @@ code, pre, samp {
 	tab-size:      1;
 }
 td {
-	min-width: 10em;
-	padding: 0.25em;
-	position:left;
+
 }
 progress {
 }
 table {
 	margin-left: 1em;
+	max-width: 30em;
+}
+.skillsTable td {
+	min-width: 10em;
+	padding: 0.25em;
+	position:left;
 }
 span {
 	font-family: "Open Sans", sans-serif;
@@ -69,6 +73,16 @@ footer {
 	padding: 0.5em;
 	margin-top: 2em;
 }
+q, blockquote {
+	background-color: rgba(0,136,204, 0.05);
+	border-left: 0.5em solid rgba(0,136,204, 0.5);
+}
+blockquote {
+	margin-bottom: 1em;
+	margin-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+}
 .screenshot {
 	margin: 1em;
 }
@@ -84,6 +98,7 @@ footer {
 	padding: 1em;
 	border: 2px #0088cc solid;
 	padding-bottom: .5em;
+	margin-bottom: .5em;
 }
 .specialSection h3, h4 {
 	margin-top: -.5em;

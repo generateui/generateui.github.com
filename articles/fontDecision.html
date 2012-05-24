@@ -1,0 +1,108 @@
+<article>
+  <section>
+    <h2>Why these fonts?</h2>
+    <p>I use the PT Mono and Open Sans fonts on this website. This article tries to
+    explain why it is not merely a matter of taste, but a matter of functional
+    design and UI usability choices.</p>
+    
+    <h3>Open Sans</h3>
+    <p class=firstpar>Open Sans is a font licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License 2.0</a>,
+    designed by <a href="https://profiles.google.com/107777320916704234605/about">Steve Matteson</a>.
+    It natively supports font weights of 300, 400, 600, 700, 800. Some of those 
+    weights also have an italic variant.</p> 
+    
+    <h4>Serif versus sans-serif</h4>
+    <p>Serif and sans-serif fonts both have their place. The problem with serif 
+    fonts is that the process of recognizing characters by humans can be problematic
+    on computer screens.
+    For plain text, a screen uses about 12 to 20 pixels to render a character. 
+    Serifs for these amounts of pixels are not very clear. This distorts the actual 
+    rendering as offset to the intended rendering. Paper and printers together use 
+    much more pixels for the same physical character size. Serifs printed on paper
+    therefore are much better recognizable.</p>
+    
+    <h4>Helvetica ancestor</h4>
+    <p>Open Sans is a further iteration over <a href="http://en.wikipedia.org/wiki/Helvetica">Helvetica</a>. 
+    The clarity of Helvetica
+    was revolutionary in the 50's, where the font was massively adopted by many
+    typesetters and logo designers. At that time, the typesetting industry mainly
+    used fonts derived from handwriting, or heavy-serif fonts. A great example of 
+    this is a coca cola ad, shown here.
+    
+    <img src="img/fontDecision/cocacola.jpg">
+    
+    <p>The logo itself (still) uses the handwriting derived font, and the supporting 
+    text is a serif font with "heavy serifs". The text with the big red "T" is 
+    barely readable. A sans-serif font
+    used here would have made the text a lot simpler to read, when the same image 
+    resolution and font size is applied.</p>
+    
+    <h4>Screen resolution</h4>
+    <p>Today, most screens don't have many pixels available for font rendering. 
+    The good newss is that this fact is rapidly becoming outdated. The new iPad
+    has a resolution of 2048×1536 pixels crammed on a 9.7" inch screen, a pixel
+    density of 264 PPI. Compared to an iPad of the previous generation, it has double
+    the amoun of pixels available to render the same character. Instead of 12-20
+    pixels, suddenly 24-4- pixels are available! Finding user stories on the web
+    of people experiencing very crisp and clear font redendering on the new iPad
+    is trivial, hundreds of those stories are within one google query.</p>
+    
+    <div class=specialSection>
+    	<h3>iPads and their screens</h3>
+    	<table class="table table-striped table-bordered table-condensed">
+    		<tr><th></th><th>1st</th><th>2nd</th><th>3rd</th></tr>
+    		<tr><td>resolution</td><td>1024×768</td><td>1024×768</td><td>2048×1536</td></tr>
+    		<tr><td>ppi</td><td>132</td><td>132</td><td>264</td></tr>
+    	</table>
+    </div>
+    
+    <p>Not only the new iPad uses a high pixel density, also desktop computer screens
+    increasingly get bigger screens with higher pixel densities. Personally, I use
+    the zoom feature of my browsers quite often, to normalize the content character
+    size among the websites I read. This screens-get-bigger-and-crisper argument
+    further undermines the anti- serif argument.</p>
+    
+    <p>However, the fact is that most screens today still use an pixel density where
+    serif fonts are not appropriate. Designers still fight for every pixel they
+    can get. When the mainstream of users have most of their devices with high
+    pixel densities, the serif fonts can be used again. Until that time, defaulting
+    on sans-serif font use should make users more happy when they consume your 
+    content</p>
+    
+    <h4>Font size</h4>
+    <p>12-20 pixels given top render a character is only given to the font renderer
+    to "content text". For titles, banners et cetera, where larger font sizes are
+    used, the problem of unclear serifs is much less present. Depending on how the
+    serifs are designed on the font and depending on the rendered font size, enough 
+    screen estate can be present to render the serif font without any unclarity
+    or rendering artefacts may appear.</p> 
+    
+    <h3>PT Mono</h3>
+    <p><a href="http://www.google.com/webfonts/specimen/PT+Mono">PT Mono</a> is 
+    a monospaced font explicitly designed to avoid ambuigity of characters. 
+    Alexandra Korolkova designed PT Mono, with participation of Isabella Chaeva 
+    and with the financial support of Google Web Fonts. From the Google Web Fonts 
+    webpage:
+    <blockquote>PT Mono was developed for specific uses in forms, tables, worksheets and 
+    other contexts.</blockquote>
+    
+    <h4>Code</h4>
+    <p>Programming languages make heavy use of the ascii character set. Many
+    characters in this character set are very similar, and thus burdens the user
+    in performing recognition. The classical example for this is the lowercase o,
+    uppercase O and the number zero 0. Fonts not adding distinct features
+    between said characters, make it uneccesary hard for the code reader to comprehend
+    the computer code. In certain situations it may even lead to hard to detect 
+    bugs. </p>
+    
+    <p>A font displaying computer code therefore should be explicitly designed for
+    readability. It's a known fact that computer code gets read 10× more often than
+    it is written. Impeccable clarity and nonambigious characters therefore are
+    a hard requirement. Code editors often use the italics and bold veriants to
+    hint the user certain aspects of the code interpretation, and as such should be 
+    supported.</p>
+        
+    <p>ROUGH DRAFT. TO BE IMPROVED.</p>
+    
+  </section>
+</article>
