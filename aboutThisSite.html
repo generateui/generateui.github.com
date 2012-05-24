@@ -27,5 +27,12 @@
     hashChanged event. Generation of listing pages is done clientside, using a 
     simple script scraping the available <samp>.html</samp> content pages, pdating the listing page
     based on this infomation.</p>
+    
+    <h3>Updating</h3>
+    <p>When code is added or changed, a manual two-stage commit is performed.
+    First, a commit containing the change of the dart code is done. Second, a new
+    javascript generation is performed and then comitted. This solves the problem
+    of intertwined javascript generated code commits, which tend to mess up clear 
+    commit logs.</p>
   </section>
 </article>
