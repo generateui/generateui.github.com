@@ -96,7 +96,7 @@ blockquote {
 .firstpar {
 	font-style: italic;
 }
-.illustration {
+figure {
     display: block;
     margin: 1em;
     margin-left: auto;
