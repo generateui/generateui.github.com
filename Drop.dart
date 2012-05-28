@@ -1,6 +1,8 @@
 #import('dart:html');
 #import('dart:json');
 
+#source('Jsonp.dart');
+
 /** Location hash is the # in the URI bar of the browser, while the git version
 is represented by a hash */
 class Drop {
@@ -12,7 +14,7 @@ class Drop {
   Drop() {
     // Change the page when the location's hash has changed
     window.on.hashChange.add((e) => loadFromHash());
-    window.on.message.add(renderVersionedPage, false);
+    //window.on.message.add(renderVersionedPage, false);
     window.location.assign("${window.location.toString()}#welcome");
   }
 
@@ -98,22 +100,23 @@ class Drop {
       String ghuri = "https://api.github.com";
       String metareq = "repos/generateui/generateui.github.com/git/trees/${hash}";
 
-      XMLHttpRequest req = new XMLHttpRequest.get("${ghuri}/${metareq}?recursive=1", (oh) {
-        String sha=null;
-        Map data = JSON.parse(oh.responseText);
-        for (var item in data["tree"]) {
+      Jsonp tree = new Jsonp("treeCallback");
+      tree.onDataReceived = (Map data) {
+        String sha = null;
+        for (var item in data["data"]["tree"]) {
           if (item["path"] == "${relativeUri}.html") {
             sha = item["sha"];
           }
         }
         String blobreq = "repos/generateui/generateui.github.com/git/blobs/";
-        XMLHttpRequest breq = new XMLHttpRequest.get("${ghuri}/${blobreq}${sha}", (oh2) {
-          Map data2 = JSON.parse(oh2.responseText);
-          String x = decode(data2["content"]);
-          document.query("#content").innerHTML = x;
-        });
-      });
-
+        Jsonp blob = new Jsonp("blobCallback");
+        blob.onDataReceived = (Map data2) {
+          String decoded = decode(data2["data"]["content"]);
+          document.query("#content").innerHTML = decoded;
+        };
+        blob.doCallback("${ghuri}/${blobreq}${sha}?callback=blobCallback");
+      };
+      tree.doCallback("${ghuri}/${metareq}?recursive=1&callback=treeCallback");
     }
   }
 
@@ -125,17 +128,19 @@ class Drop {
 
   renderVersionedPage(MessageEvent e) {
     var data = JSON.parse(e.data);
-    document.query("#content").innerHTML = data;//["data"];
+    document.query("#content").innerHTML = data["data"];//["data"];
   }
 
   showMetaPage(String relativeUri) {
     String ghuri = "https://api.github.com";
-    String metareq = "/repos/generateui/generateui.github.com/commits?path=${relativeUri}.html";
-    XMLHttpRequest req = new XMLHttpRequest.get("${ghuri}${metareq}", (oh) {
-      List data = JSON.parse(oh.responseText);
+    String metareq = "/repos/generateui/generateui.github.com/commits?path=${relativeUri}.html&callback=metaCallback";
+
+    Jsonp tree = new Jsonp("metaCallback");
+    tree.onDataReceived = (Map data) {
+      //List data = JSON.parse(oh.responseText);
       StringBuffer sb = new StringBuffer();
       sb.add("<ol>");
-      for (var d in data) {
+      for (var d in data["data"]) {
         sb.add("""<li class=meta><span class=meta-change-message>${escape(d["commit"]["message"])}</span>""");
         String sdate = d["commit"]["author"]["date"];
         sdate = sdate.substring(0, 10);
@@ -166,11 +171,8 @@ class Drop {
           changeVersion(id);
         });
       }
-
-      StringBuffer sb2 = new StringBuffer();
-      //sb.add("<span>Last edited ${data[0]["committer"]["date"]}</span>");
-      document.query("#metacontent-summary").innerHTML = sb2.toString();
-    });
+    };
+    tree.doCallback("${ghuri}${metareq}");
   }
 
   String escape(String html) {
