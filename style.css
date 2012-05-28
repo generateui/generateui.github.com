@@ -12,6 +12,9 @@ body {
 p {
 	font-family: "Open Sans", sans-serif;
 }
+p.meta {
+	margin: 0px 0px 0px 0px;
+}
 samp {
 	background: rgba(0,0,0,0.1);
 	padding: 2px;
@@ -38,6 +41,16 @@ span {
 	margin-left: 0.25em;
 	margin-right: 0.25em;
 }
+span.meta {
+	font-size: 10px;
+	color: rgba(0,0,0,0.8);
+}
+li.meta:hover {
+	background-color: rgba(255,133,71,0.25);
+}
+samp.meta {
+	font-size: 10px;
+}
 article {
 }
 /*
@@ -45,6 +58,20 @@ h1, h2, h3, h4 {
 	margin-top: 0.5em;
 }
 */
+h2.meta {
+	background: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+h3.meta {
+	margin-bottom: 0.5em;
+}
+#metacontent-changes {
+	margin-left: 0.5em;
+}
+.meta-change-message {
+	font-weight: 600;
+}
 h2 {
 	background: rgba(0,136,204,0.1);
 	margin-left: -2em;
@@ -88,7 +115,6 @@ figure {
 	font-family: "Open Sans", sans-serif;
 	font-size: 1.5em;
 	font-weight: 300;
-	display: inline-block;
 	margin-top: .5em;
 }
 .nav a {
