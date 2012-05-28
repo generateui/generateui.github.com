@@ -3,10 +3,16 @@
   <head>
     <meta charset=utf-8>
     <title>Ruud Poutsma</title>
+    
     <!--[if IE]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
       </script>
     <![endif]-->
+    
+    <script type="application/dart" src="Drop.dart"></script>
+    <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+    <!--<script type="text/javascript" src="Drop.dart.js"></script>-->
+    
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -22,8 +28,21 @@
 	      <a href="#articles/articles" class="active" id=articleslink><span class=icon-pencil></span> articles</a>
 	      <a href="#about"><span class=icon-user></span> about</a>
     </div>
-    
-    <div id=content></div>
+
+	<!-- content and meta-content -->    
+    <div class="container-fluid">
+	  <div class="row-fluid">
+	    <div class="span7" id=content></div>
+	    <div class="span4" id=metacontent>
+	    	<h3>Meta information</h3>
+	    	<h4>Summary</h4>
+	    	<div id=metacontent-summary>Summary placehoolder</div>
+	    	<h4>Changes</h4>
+	    	<div id=metacontent-changes></div>
+	    </div>
+	  </div>
+	</div>
+	    
     
     <article id=error>
 	  <section>
@@ -40,8 +59,5 @@
       	 Ruud Poutsma and <a href="#attribution">many others</a>.
       	about <a href="#aboutThisSite"> this site</a>
     </footer>
-    
-    <script type="application/dart" src="Drop.dart"></script>
-    <script type="text/javascript" src="Drop.dart.js"></script>
   </body>
 </html>

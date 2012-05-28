@@ -1,3 +1,4 @@
+/* Site-wide defaults #FF8547 255.133.71*/
 * {
 	font-family: "Open Sans", sans-serif;
 }
@@ -32,39 +33,18 @@ figcaption {
 	margin-bottom: 0.5em;
 	margin-top: 0.5em;
 }
-.skillsTable td {
-	min-width: 10em;
-	padding: 0.25em;
-	position:left;
-}
 span {
 	font-family: "Open Sans", sans-serif;
 	margin-left: 0.25em;
 	margin-right: 0.25em;
 }
-#content {
-	margin-right: 1em;
-	margin-bottom: 1em;
-	max-width: 48em;
-}
-#error {
-	display: none;
-}
-.nav {
-	font-family: "Open Sans", sans-serif;
-	font-size: 1.5em;
-	font-weight: 300;
-	display: inline-block;
-	margin-top: .5em;
-}
-.nav a {
-	margin-right: 1em;
-} 
 article {
 }
+/*
 h1, h2, h3, h4 {
 	margin-top: 0.5em;
 }
+*/
 h2 {
 	background: rgba(0,136,204,0.1);
 	margin-left: -2em;
@@ -90,12 +70,6 @@ blockquote {
 	padding-bottom: 0.5em;
 	padding-top: 0.5em;
 }
-.screenshot {
-	margin: 1em;
-}
-.firstpar {
-	font-style: italic;
-}
 figure {
     display: block;
     margin: 1em;
@@ -104,6 +78,27 @@ figure {
     border: 0.25em solid rgba(0,136,204, 1.0);
     background-color: rgba(0,136,204, 0.1);
     padding: 0.5em;
+}
+.skillsTable td {
+	min-width: 10em;
+	padding: 0.25em;
+	position:left;
+}
+.nav {
+	font-family: "Open Sans", sans-serif;
+	font-size: 1.5em;
+	font-weight: 300;
+	display: inline-block;
+	margin-top: .5em;
+}
+.nav a {
+	margin-right: 1em;
+} 
+.screenshot {
+	margin: 1em;
+}
+.firstpar {
+	font-style: italic;
 }
 .logo {
 	font-size: 1.5em;
@@ -165,6 +160,24 @@ figure {
 }
 .organisation {
 	font-weight: 400;
+}
+/* ID's */
+#content {
+/*	margin-right: 1em;
+	margin-bottom: 1em;
+	max-width: 48em; */
+}
+
+#metacontent {
+	background-color: rgba(255,133,71,0.05);
+	border: 2px solid rgba(255,133,71,1.0);
+	padding: 1em;
+	/*margin-top: 1em;*/
+	margin-bottom: 1em;
+}
+
+#error {
+	display: none;
 }
 /* Bootstrap overridden */
 .label {
