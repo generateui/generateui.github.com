@@ -257,6 +257,9 @@ $defProp(Object.prototype, "noSuchMethod", function(name, args) {
 $defProp(Object.prototype, "$dom_addEventListener$3", function($0, $1, $2) {
   return this.noSuchMethod("$dom_addEventListener", [$0, $1, $2]);
 });
+$defProp(Object.prototype, "$dom_removeEventListener$3", function($0, $1, $2) {
+  return this.noSuchMethod("$dom_removeEventListener", [$0, $1, $2]);
+});
 $defProp(Object.prototype, "add$1", function($0) {
   return this.noSuchMethod("add", [$0]);
 });
@@ -544,6 +547,9 @@ ListFactory.ListFactory$from$factory = function(other) {
 $defProp(ListFactory.prototype, "get$length", function() { return this.length; });
 $defProp(ListFactory.prototype, "set$length", function(value) { return this.length = value; });
 $defProp(ListFactory.prototype, "add", function(value) {
+  this.push(value);
+});
+$defProp(ListFactory.prototype, "addLast", function(value) {
   this.push(value);
 });
 $defProp(ListFactory.prototype, "addAll", function(collection) {
@@ -1545,6 +1551,12 @@ $dynamic("$dom_addEventListener$3").EventTarget = function($0, $1, $2) {
   }
   return Object.prototype.$dom_addEventListener$3.call(this, $0, $1, $2);
 };
+$dynamic("$dom_removeEventListener$3").EventTarget = function($0, $1, $2) {
+  if (Object.getPrototypeOf(this).hasOwnProperty("$dom_removeEventListener$3")) {
+    return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+  }
+  return Object.prototype.$dom_removeEventListener$3.call(this, $0, $1, $2);
+};
 $dynamic("get$nodes").Node = function() {
   return new _ChildNodeListLazy(this);
 }
@@ -1621,6 +1633,9 @@ $dynamic("get$on").AbstractWorker = function() {
 $dynamic("$dom_addEventListener$3").AbstractWorker = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").AbstractWorker = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 function _EventsImpl(_ptr) {
   this._ptr = _ptr;
 }
@@ -1660,6 +1675,9 @@ $dynamic("get$on").BatteryManager = function() {
 $dynamic("$dom_addEventListener$3").BatteryManager = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").BatteryManager = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_BatteryManagerEventsImpl, _EventsImpl);
 function _BatteryManagerEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -1697,6 +1715,9 @@ $dynamic("get$status").DOMApplicationCache = function() { return this.status; };
 $dynamic("$dom_addEventListener$3").DOMApplicationCache = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").DOMApplicationCache = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_DOMApplicationCacheEventsImpl, _EventsImpl);
 function _DOMApplicationCacheEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -1726,6 +1747,9 @@ $dynamic("iterator").DOMStringList = function() {
   return new _FixedSizeListIterator_dart_core_String(this);
 }
 $dynamic("add").DOMStringList = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").DOMStringList = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").DOMStringList = function(collection) {
@@ -1765,6 +1789,9 @@ $dynamic("get$on").WorkerContext = function() {
 $dynamic("$dom_addEventListener$3").WorkerContext = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").WorkerContext = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $dynamic("get$on").DedicatedWorkerContext = function() {
   return new _DedicatedWorkerContextEventsImpl(this);
 }
@@ -1782,6 +1809,9 @@ $dynamic("get$on").DeprecatedPeerConnection = function() {
 $dynamic("get$readyState").DeprecatedPeerConnection = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").DeprecatedPeerConnection = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").DeprecatedPeerConnection = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_DeprecatedPeerConnectionEventsImpl, _EventsImpl);
 function _DeprecatedPeerConnectionEventsImpl(_ptr) {
@@ -1880,6 +1910,9 @@ FilteredElementList.prototype.get$add = function() {
 }
 FilteredElementList.prototype.addAll = function(collection) {
   collection.forEach$1(this.get$add());
+}
+FilteredElementList.prototype.addLast = function(value) {
+  this.add(value);
 }
 FilteredElementList.prototype.clear$_ = function() {
   this._childNodes.clear$_();
@@ -2002,6 +2035,9 @@ _ChildrenElementList.prototype.add = function(value) {
   this._html_element.appendChild(value);
   return value;
 }
+_ChildrenElementList.prototype.addLast = function(value) {
+  return this.add(value);
+}
 _ChildrenElementList.prototype.iterator = function() {
   return this._toList().iterator();
 }
@@ -2068,6 +2104,9 @@ _FrozenElementList.prototype.$setindex = function(index, value) {
 _FrozenElementList.prototype.add = function(value) {
   $throw(const$0003);
 }
+_FrozenElementList.prototype.addLast = function(value) {
+  $throw(const$0003);
+}
 _FrozenElementList.prototype.iterator = function() {
   return new _FrozenElementListIterator(this);
 }
@@ -2127,6 +2166,9 @@ _ListWrapper.prototype.$setindex = function(index, value) {
 }
 _ListWrapper.prototype.add = function(value) {
   return this._html_list.add(value);
+}
+_ListWrapper.prototype.addLast = function(value) {
+  return this._html_list.addLast(value);
 }
 _ListWrapper.prototype.addAll = function(collection) {
   return this._html_list.addAll(collection);
@@ -2351,6 +2393,9 @@ $dynamic("get$readyState").EventSource = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").EventSource = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").EventSource = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_EventSourceEventsImpl, _EventsImpl);
 function _EventSourceEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2363,8 +2408,15 @@ _EventListenerListImpl.prototype.add = function(listener, useCapture) {
   this._add(listener, useCapture);
   return this;
 }
+_EventListenerListImpl.prototype.remove = function(listener, useCapture) {
+  this._remove(listener, useCapture);
+  return this;
+}
 _EventListenerListImpl.prototype._add = function(listener, useCapture) {
   this._ptr.$dom_addEventListener$3(this._type, listener, useCapture);
+}
+_EventListenerListImpl.prototype._remove = function(listener, useCapture) {
+  this._ptr.$dom_removeEventListener$3(this._type, listener, useCapture);
 }
 _EventListenerListImpl.prototype.add$1 = function($0) {
   return this.add($wrap_call$1(to$call$1($0)), false);
@@ -2385,6 +2437,9 @@ $dynamic("iterator").FileList = function() {
   return new _FixedSizeListIterator_html_File(this);
 }
 $dynamic("add").FileList = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").FileList = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").FileList = function(collection) {
@@ -2418,6 +2473,9 @@ $dynamic("get$readyState").FileReader = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").FileReader = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").FileReader = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_FileReaderEventsImpl, _EventsImpl);
 function _FileReaderEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2429,6 +2487,9 @@ $dynamic("get$length").FileWriter = function() { return this.length; };
 $dynamic("get$readyState").FileWriter = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").FileWriter = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").FileWriter = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_FileWriterEventsImpl, _EventsImpl);
 function _FileWriterEventsImpl(_ptr) {
@@ -2448,6 +2509,9 @@ $dynamic("iterator").Float32Array = function() {
   return new _FixedSizeListIterator_num(this);
 }
 $dynamic("add").Float32Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").Float32Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").Float32Array = function(collection) {
@@ -2487,6 +2551,9 @@ $dynamic("iterator").Float64Array = function() {
   return new _FixedSizeListIterator_num(this);
 }
 $dynamic("add").Float64Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").Float64Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").Float64Array = function(collection) {
@@ -2539,6 +2606,9 @@ $dynamic("iterator").HTMLCollection = function() {
 $dynamic("add").HTMLCollection = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").HTMLCollection = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").HTMLCollection = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -2575,6 +2645,9 @@ $dynamic("get$name").IDBDatabase = function() { return this.name; };
 $dynamic("$dom_addEventListener$3").IDBDatabase = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").IDBDatabase = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_IDBDatabaseEventsImpl, _EventsImpl);
 function _IDBDatabaseEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2598,6 +2671,12 @@ $dynamic("$dom_addEventListener$3").IDBRequest = function($0, $1, $2) {
   }
   return Object.prototype.$dom_addEventListener$3.call(this, $0, $1, $2);
 };
+$dynamic("$dom_removeEventListener$3").IDBRequest = function($0, $1, $2) {
+  if (Object.getPrototypeOf(this).hasOwnProperty("$dom_removeEventListener$3")) {
+    return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+  }
+  return Object.prototype.$dom_removeEventListener$3.call(this, $0, $1, $2);
+};
 $inherits(_IDBRequestEventsImpl, _EventsImpl);
 function _IDBRequestEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2608,6 +2687,9 @@ $dynamic("get$on").IDBTransaction = function() {
 $dynamic("$dom_addEventListener$3").IDBTransaction = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").IDBTransaction = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_IDBTransactionEventsImpl, _EventsImpl);
 function _IDBTransactionEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2617,6 +2699,9 @@ $dynamic("get$on").IDBVersionChangeRequest = function() {
 }
 $dynamic("$dom_addEventListener$3").IDBVersionChangeRequest = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").IDBVersionChangeRequest = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_IDBVersionChangeRequestEventsImpl, _IDBRequestEventsImpl);
 function _IDBVersionChangeRequestEventsImpl(_ptr) {
@@ -2646,6 +2731,9 @@ $dynamic("iterator").Int16Array = function() {
   return new _FixedSizeListIterator_int(this);
 }
 $dynamic("add").Int16Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").Int16Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").Int16Array = function(collection) {
@@ -2687,6 +2775,9 @@ $dynamic("iterator").Int32Array = function() {
 $dynamic("add").Int32Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").Int32Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").Int32Array = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -2726,6 +2817,9 @@ $dynamic("iterator").Int8Array = function() {
 $dynamic("add").Int8Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").Int8Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").Int8Array = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -2756,6 +2850,9 @@ $dynamic("get$on").JavaScriptAudioNode = function() {
 $dynamic("$dom_addEventListener$3").JavaScriptAudioNode = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").JavaScriptAudioNode = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_JavaScriptAudioNodeEventsImpl, _EventsImpl);
 function _JavaScriptAudioNodeEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -2769,12 +2866,18 @@ $dynamic("get$readyState").MediaStream = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").MediaStream = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").MediaStream = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $dynamic("get$name").HTMLMapElement = function() { return this.name; };
 $dynamic("start$0").HTMLMarqueeElement = function() {
   return this.start();
 };
 $dynamic("$dom_addEventListener$3").MediaController = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").MediaController = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_MediaElementEventsImpl, _ElementEventsImpl);
 function _MediaElementEventsImpl(_ptr) {
@@ -2793,6 +2896,9 @@ $dynamic("iterator").MediaList = function() {
   return new _FixedSizeListIterator_dart_core_String(this);
 }
 $dynamic("add").MediaList = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").MediaList = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").MediaList = function(collection) {
@@ -2831,6 +2937,9 @@ $dynamic("get$on").MessagePort = function() {
 $dynamic("$dom_addEventListener$3").MessagePort = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").MessagePort = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $dynamic("start$0").MessagePort = function() {
   return this.start();
 };
@@ -2853,6 +2962,9 @@ $dynamic("iterator").NamedNodeMap = function() {
   return new _FixedSizeListIterator_html_Node(this);
 }
 $dynamic("add").NamedNodeMap = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").NamedNodeMap = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").NamedNodeMap = function(collection) {
@@ -2888,6 +3000,9 @@ _ChildNodeListLazy.prototype.last = function() {
   return this._this.lastChild;
 }
 _ChildNodeListLazy.prototype.add = function(value) {
+  this._this.appendChild(value);
+}
+_ChildNodeListLazy.prototype.addLast = function(value) {
   this._this.appendChild(value);
 }
 _ChildNodeListLazy.prototype.addAll = function(collection) {
@@ -2954,6 +3069,9 @@ $dynamic("iterator").NodeList = function() {
   return new _FixedSizeListIterator_html_Node(this);
 }
 $dynamic("add").NodeList = function(value) {
+  this._parent.appendChild(value);
+}
+$dynamic("addLast").NodeList = function(value) {
   this._parent.appendChild(value);
 }
 $dynamic("addAll").NodeList = function(collection) {
@@ -3023,6 +3141,9 @@ $dynamic("get$on").PeerConnection00 = function() {
 $dynamic("get$readyState").PeerConnection00 = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").PeerConnection00 = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").PeerConnection00 = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_PeerConnection00EventsImpl, _EventsImpl);
 function _PeerConnection00EventsImpl(_ptr) {
@@ -3113,6 +3234,9 @@ $dynamic("get$on").SpeechRecognition = function() {
 $dynamic("$dom_addEventListener$3").SpeechRecognition = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").SpeechRecognition = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $dynamic("start$0").SpeechRecognition = function() {
   return this.start();
 };
@@ -3172,6 +3296,9 @@ $dynamic("iterator").StyleSheetList = function() {
 $dynamic("add").StyleSheetList = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").StyleSheetList = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").StyleSheetList = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -3204,6 +3331,9 @@ $dynamic("get$on").TextTrack = function() {
 $dynamic("$dom_addEventListener$3").TextTrack = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").TextTrack = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_TextTrackEventsImpl, _EventsImpl);
 function _TextTrackEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -3214,6 +3344,9 @@ $dynamic("get$on").TextTrackCue = function() {
 $dynamic("get$id").TextTrackCue = function() { return this.id; };
 $dynamic("$dom_addEventListener$3").TextTrackCue = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").TextTrackCue = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_TextTrackCueEventsImpl, _EventsImpl);
 function _TextTrackCueEventsImpl(_ptr) {
@@ -3226,6 +3359,9 @@ $dynamic("get$on").TextTrackList = function() {
 $dynamic("get$length").TextTrackList = function() { return this.length; };
 $dynamic("$dom_addEventListener$3").TextTrackList = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").TextTrackList = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_TextTrackListEventsImpl, _EventsImpl);
 function _TextTrackListEventsImpl(_ptr) {
@@ -3245,6 +3381,9 @@ $dynamic("iterator").TouchList = function() {
   return new _FixedSizeListIterator_html_Touch(this);
 }
 $dynamic("add").TouchList = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").TouchList = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").TouchList = function(collection) {
@@ -3287,6 +3426,9 @@ $dynamic("iterator").Uint16Array = function() {
 $dynamic("add").Uint16Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").Uint16Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").Uint16Array = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -3324,6 +3466,9 @@ $dynamic("iterator").Uint32Array = function() {
   return new _FixedSizeListIterator_int(this);
 }
 $dynamic("add").Uint32Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
+$dynamic("addLast").Uint32Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
 $dynamic("addAll").Uint32Array = function(collection) {
@@ -3365,6 +3510,9 @@ $dynamic("iterator").Uint8Array = function() {
 $dynamic("add").Uint8Array = function(value) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
+$dynamic("addLast").Uint8Array = function(value) {
+  $throw(new UnsupportedOperationException("Cannot add to immutable List."));
+}
 $dynamic("addAll").Uint8Array = function(collection) {
   $throw(new UnsupportedOperationException("Cannot add to immutable List."));
 }
@@ -3397,6 +3545,9 @@ $dynamic("get$readyState").WebSocket = function() { return this.readyState; };
 $dynamic("$dom_addEventListener$3").WebSocket = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").WebSocket = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $inherits(_WebSocketEventsImpl, _EventsImpl);
 function _WebSocketEventsImpl(_ptr) {
   _EventsImpl.call(this, _ptr);
@@ -3409,6 +3560,9 @@ $dynamic("get$name").DOMWindow = function() { return this.name; };
 $dynamic("get$status").DOMWindow = function() { return this.status; };
 $dynamic("$dom_addEventListener$3").DOMWindow = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").DOMWindow = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $dynamic("open$3").DOMWindow = function($0, $1, $2) {
   return this.open($0, $1, $2);
@@ -3443,6 +3597,9 @@ $dynamic("set$withCredentials").XMLHttpRequest = function(value) { return this.w
 $dynamic("$dom_addEventListener$3").XMLHttpRequest = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
+$dynamic("$dom_removeEventListener$3").XMLHttpRequest = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
 $dynamic("open$3").XMLHttpRequest = function($0, $1, $2) {
   return this.open($0, $1, $2);
 };
@@ -3465,6 +3622,9 @@ $dynamic("get$on").XMLHttpRequestUpload = function() {
 }
 $dynamic("$dom_addEventListener$3").XMLHttpRequestUpload = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
+};
+$dynamic("$dom_removeEventListener$3").XMLHttpRequestUpload = function($0, $1, $2) {
+  return this.removeEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
 $inherits(_XMLHttpRequestUploadEventsImpl, _EventsImpl);
 function _XMLHttpRequestUploadEventsImpl(_ptr) {
@@ -3677,7 +3837,6 @@ function Drop() {
     return $this.loadFromHash();
   })
   ), false);
-  get$$window().get$on().get$message().add($wrap_call$1(this.get$renderVersionedPage()), false);
   get$$window().location.assign(("" + get$$window().location.toString() + "#welcome"));
 }
 Drop.prototype.loadFromHash = function() {
@@ -3764,10 +3923,10 @@ Drop.prototype.showPage = function(relativeUri, hash) {
   else {
     var ghuri = "https://api.github.com";
     var metareq = ("repos/generateui/generateui.github.com/git/trees/" + hash);
-    var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + "/" + metareq + "?recursive=1"), $wrap_call$1((function (oh) {
+    var tree = new Jsonp("treeCallback");
+    tree.onDataReceived = (function (data) {
       var sha = null;
-      var data = json_JSON.parse(oh.get$responseText());
-      var $$list = data.$index("tree");
+      var $$list = data.$index("data").$index("tree");
       for (var $$i = $$list.iterator(); $$i.hasNext(); ) {
         var item = $$i.next();
         if ($eq$(item.$index("path"), ("" + relativeUri + ".html"))) {
@@ -3775,14 +3934,16 @@ Drop.prototype.showPage = function(relativeUri, hash) {
         }
       }
       var blobreq = "repos/generateui/generateui.github.com/git/blobs/";
-      var breq = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + "/" + blobreq + sha), $wrap_call$1((function (oh2) {
-        var data2 = json_JSON.parse(oh2.get$responseText());
-        var x = decode(data2.$index("content"));
-        get$$document().query("#content").set$innerHTML(x);
+      var blob = new Jsonp("blobCallback");
+      blob.onDataReceived = (function (data2) {
+        var decoded = decode(data2.$index("data").$index("content"));
+        get$$document().query("#content").set$innerHTML(decoded);
       })
-      ));
+      ;
+      blob.doCallback(("" + ghuri + "/" + blobreq + sha + "?callback=blobCallback"), to$call$1(null));
     })
-    ));
+    ;
+    tree.doCallback(("" + ghuri + "/" + metareq + "?recursive=1&callback=treeCallback"), to$call$1(null));
   }
 }
 Drop.prototype.showError = function(e) {
@@ -3793,22 +3954,16 @@ Drop.prototype.showError = function(e) {
 Drop.prototype.get$showError = function() {
   return this.showError.bind(this);
 }
-Drop.prototype.renderVersionedPage = function(e) {
-  var data = json_JSON.parse(e.data);
-  get$$document().query("#content").set$innerHTML(data);
-}
-Drop.prototype.get$renderVersionedPage = function() {
-  return this.renderVersionedPage.bind(this);
-}
 Drop.prototype.showMetaPage = function(relativeUri) {
   var $this = this;
   var ghuri = "https://api.github.com";
-  var metareq = ("/repos/generateui/generateui.github.com/commits?path=" + relativeUri + ".html");
-  var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + metareq), $wrap_call$1((function (oh) {
-    var data = json_JSON.parse(oh.get$responseText());
+  var metareq = ("/repos/generateui/generateui.github.com/commits?path=" + relativeUri + ".html&callback=metaCallback");
+  var tree = new Jsonp("metaCallback");
+  tree.onDataReceived = (function (data) {
     var sb = new StringBufferImpl("");
     sb.add("<ol>");
-    for (var $$i = data.iterator(); $$i.hasNext(); ) {
+    var $$list = data.$index("data");
+    for (var $$i = $$list.iterator(); $$i.hasNext(); ) {
       var d = $$i.next();
       sb.add(("<li class=meta><span class=meta-change-message>" + $this.escape(d.$index("commit").$index("message")) + "</span>"));
       var sdate = d.$index("commit").$index("author").$index("date");
@@ -3843,16 +3998,55 @@ Drop.prototype.showMetaPage = function(relativeUri) {
       }).bind(null, se)
       ), false);
     }
-    var sb2 = new StringBufferImpl("");
-    get$$document().query("#metacontent-summary").set$innerHTML(sb2.toString());
   })
-  ));
+  ;
+  tree.doCallback(("" + ghuri + metareq), to$call$1(null));
 }
 Drop.prototype.escape = function(html) {
   var result = html.replaceAll("&", "&amp;");
   result = result.replaceAll("<", "&lt;");
   result = result.replaceAll(">", "&gt;");
   return result;
+}
+function Jsonp(_callbackFunctionName) {
+  this._callbackFunctionName = _callbackFunctionName;
+  this._script = _ElementFactoryProvider.Element$tag$factory("script");
+}
+Jsonp.prototype._addScriptText = function() {
+  this._script.set$text(("        function " + this._callbackFunctionName + "(s) { \n          var messageData = JSON.stringify(s);\n          var data = '{\"requestName\":\"" + this._callbackFunctionName + "\",\"jsonpData\":' + messageData + '}';           \n          window.postMessage(data, '*');\n        }\n    "));
+}
+Jsonp.prototype._removeScriptText = function() {
+  this._script.set$text("");
+}
+Jsonp.prototype.doCallback = function(url, onData) {
+  var $this = this;
+  if ($eq$(url.contains(this._callbackFunctionName), false)) {
+    $throw("callback url must contain the callback function name!");
+  }
+  if (onData != null) {
+    this.onDataReceived = onData;
+  }
+  if (this.onDataReceived == null) {
+    $throw("onData callback must either be setup in advance, or passed into this method");
+  }
+  this._onMessage = (function (event) {
+    var s = event.data;
+    var json = json_JSON.parse(s);
+    if ($eq$(json.$index("requestName"), $this._callbackFunctionName)) {
+      get$$window().get$on().get$message().remove($wrap_call$1(to$call$1($this._onMessage)), false);
+      $this._removeScriptText();
+      var result = json.$index("jsonpData");
+      $this.onDataReceived(result);
+    }
+  })
+  ;
+  get$$window().get$on().get$message().add($wrap_call$1(to$call$1(this._onMessage)), false);
+  this._addScriptText();
+  get$$document().body.get$elements().addLast(this._script);
+  var script = _ElementFactoryProvider.Element$tag$factory("script");
+  script.src = url;
+  get$$document().body.get$elements().addLast(script);
+  get$$document().body.get$elements().removeLast();
 }
 function decode(data) {
   var result = new Array();
