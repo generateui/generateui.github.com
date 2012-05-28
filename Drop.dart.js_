@@ -293,6 +293,9 @@ $defProp(Object.prototype, "is$html_Element", function() {
 $defProp(Object.prototype, "open$3", function($0, $1, $2) {
   return this.noSuchMethod("open", [$0, $1, $2]);
 });
+$defProp(Object.prototype, "query$1", function($0) {
+  return this.noSuchMethod("query", [$0]);
+});
 $defProp(Object.prototype, "remove$0", function() {
   return this.noSuchMethod("remove", []);
 });
@@ -457,6 +460,9 @@ Math.parseDouble = function(str) {
     return ret;
 }
 function Strings() {}
+Strings.String$fromCharCodes$factory = function(charCodes) {
+  return StringBase.createFromCharCodes(charCodes);
+}
 Strings.join = function(strings, separator) {
   return StringBase.join(strings, separator);
 }
@@ -1197,6 +1203,12 @@ StringBufferImpl.prototype.toString = function() {
 StringBufferImpl.prototype.add$1 = StringBufferImpl.prototype.add;
 StringBufferImpl.prototype.clear$0 = StringBufferImpl.prototype.clear$_;
 function StringBase() {}
+StringBase.createFromCharCodes = function(charCodes) {
+  if (Object.getPrototypeOf(charCodes) !== Array.prototype) {
+    charCodes = new ListFactory.ListFactory$from$factory(charCodes);
+  }
+  return String.fromCharCode.apply(null, charCodes);
+}
 StringBase.join = function(strings, separator) {
   if (strings.get$length() == (0)) return "";
   var s = strings.$index((0));
@@ -1291,7 +1303,7 @@ DateImplementation.fromEpoch$ctor = function(value, timeZone) {
 DateImplementation.fromEpoch$ctor.prototype = DateImplementation.prototype;
 function DateImplementation() {}
 DateImplementation.DateImplementation$fromString$factory = function(formattedString) {
-  var re = const$0005;
+  var re = const$0006;
   var match = re.firstMatch(formattedString);
   if (null != match) {
     function parseIntOrZero(matched) {
@@ -1315,7 +1327,7 @@ DateImplementation.DateImplementation$fromString$factory = function(formattedStr
       milliseconds = (999);
     }
     var isUtc = (null != match.$index((8))) && (match.$index((8)) != "");
-    var timezone = isUtc ? const$0006 : new TimeZoneImplementation.local$ctor();
+    var timezone = isUtc ? const$0007 : new TimeZoneImplementation.local$ctor();
     var epochValue = DateImplementation._valueFromDecomposed(years, month, day, hours, minutes, seconds, milliseconds, isUtc);
     if (null == epochValue) {
       $throw(new IllegalArgumentException(formattedString));
@@ -1600,6 +1612,9 @@ $dynamic("get$$$dom_lastElementChild").Element = function() {
   return this.lastElementChild;
 }
 $dynamic("get$style").Element = function() { return this.style; };
+$dynamic("query$1").Element = function($0) {
+  return this.querySelector($0);
+};
 $dynamic("get$on").AbstractWorker = function() {
   return new _AbstractWorkerEventsImpl(this);
 }
@@ -1783,7 +1798,7 @@ $dynamic("get$on").HTMLDocument = function() {
 }
 $dynamic("get$readyState").HTMLDocument = function() { return this.readyState; };
 $dynamic("query").HTMLDocument = function(selectors) {
-  if (const$0004.hasMatch(selectors)) {
+  if (const$0005.hasMatch(selectors)) {
     return this.getElementById(selectors.substring((1)));
   }
   return this.$dom_querySelector(selectors);
@@ -1792,7 +1807,7 @@ $dynamic("$dom_querySelector").HTMLDocument = function(selectors) {
   return this.querySelector(selectors);
 }
 $dynamic("queryAll").HTMLDocument = function(selectors) {
-  if (const$0007.hasMatch(selectors)) {
+  if (const$0008.hasMatch(selectors)) {
     var mutableMatches = this.getElementsByName(selectors.substring((7), selectors.length - (2)));
     var len = mutableMatches.get$length();
     var copyOfMatches = new Array(len);
@@ -1802,7 +1817,7 @@ $dynamic("queryAll").HTMLDocument = function(selectors) {
     }
     return new _FrozenElementList._wrap$ctor(copyOfMatches);
   }
-  else if (const$0008.hasMatch(selectors)) {
+  else if (const$0009.hasMatch(selectors)) {
     var mutableMatches = this.getElementsByTagName(selectors);
     var len = mutableMatches.get$length();
     var copyOfMatches = new Array(len);
@@ -1816,6 +1831,9 @@ $dynamic("queryAll").HTMLDocument = function(selectors) {
     return new _FrozenElementList._wrap$ctor(this.querySelectorAll(selectors));
   }
 }
+$dynamic("query$1").HTMLDocument = function($0) {
+  return this.query($0);
+};
 $inherits(_DocumentEventsImpl, _ElementEventsImpl);
 function _DocumentEventsImpl(_ptr) {
   _ElementEventsImpl.call(this, _ptr);
@@ -1931,6 +1949,9 @@ $dynamic("get$style").DocumentFragment = function() {
 $dynamic("get$on").DocumentFragment = function() {
   return new _ElementEventsImpl(this);
 }
+$dynamic("query$1").DocumentFragment = function($0) {
+  return this.querySelector($0);
+};
 $dynamic("get$name").DocumentType = function() { return this.name; };
 _ChildrenElementList._wrap$ctor = function(element) {
   this._childElements = element.get$$$dom_children();
@@ -2979,6 +3000,9 @@ $dynamic("filter$1").NodeList = function($0) {
 $dynamic("forEach$1").NodeList = function($0) {
   return this.forEach($wrap_call$1(to$call$1($0)));
 };
+$dynamic("query$1").NodeSelector = function($0) {
+  return this.querySelector($0);
+};
 $dynamic("get$on").Notification = function() {
   return new _NotificationEventsImpl(this);
 }
@@ -3187,6 +3211,7 @@ function _TextTrackEventsImpl(_ptr) {
 $dynamic("get$on").TextTrackCue = function() {
   return new _TextTrackCueEventsImpl(this);
 }
+$dynamic("get$id").TextTrackCue = function() { return this.id; };
 $dynamic("$dom_addEventListener$3").TextTrackCue = function($0, $1, $2) {
   return this.addEventListener($0, $wrap_call$1(to$call$1($1)), $2);
 };
@@ -3394,6 +3419,9 @@ function _WindowEventsImpl(_ptr) {
 }
 _WindowEventsImpl.prototype.get$hashChange = function() {
   return this._get("hashchange");
+}
+_WindowEventsImpl.prototype.get$message = function() {
+  return this._get("message");
 }
 _WindowEventsImpl.prototype.get$mouseOver = function() {
   return this._get("mouseover");
@@ -3649,67 +3677,72 @@ function Drop() {
     return $this.loadFromHash();
   })
   ), false);
-  this.loadFromHash();
+  get$$window().get$on().get$message().add($wrap_call$1(this.get$renderVersionedPage()), false);
+  get$$window().location.assign(("" + get$$window().location.toString() + "#welcome"));
 }
 Drop.prototype.loadFromHash = function() {
-  if (get$$window().location.hash == "") {
-    this.showPage("welcome", null);
+  var splitted = get$$window().location.hash.split$_("/");
+  var section = splitted.$index((0)).substring$1((1));
+  var uri = null;
+  if (splitted.get$length() == (2)) {
+    var page = splitted.$index((1));
+    var version = null;
+    version = this.versionFromUri(page);
+    uri = ("" + section + "/" + page);
+    this.showPage(this.uriWithoutVersion(uri), version);
+    if (this.oldPage != page && this.oldSection != section) {
+      this.showMetaPage(uri);
+    }
+    this.oldPage = page;
+    this.oldSection = section;
+    this.oldVersion = version;
   }
   else {
-    var splitted = get$$window().location.hash.split$_("/");
-    var section = splitted.$index((0)).substring$1((1));
-    var uri = null;
-    if (splitted.get$length() == (2)) {
-      var page = splitted.$index((1));
-      var hash = this.hashFromUri(page);
-      uri = ("" + section + "/" + page);
-      this.showPage(this.uriWithoutHash(uri), hash);
-      if (this.oldPage != page && this.oldSection != section) {
-        this.showMetaPage(uri);
-      }
-      this.oldPage = page;
-    }
-    else {
-      uri = ("" + section);
-      var hash = this.hashFromUri(section);
-      this.showPage(this.uriWithoutHash(uri), hash);
-      if (section != this.oldSection) {
-        this.showMetaPage(uri);
-      }
+    var version = this.versionFromUri(section);
+    section = this.uriWithoutVersion(section);
+    this.showPage(section, version);
+    if (section != this.oldSection) {
+      this.showMetaPage(section);
     }
     this.oldSection = section;
+    this.oldVersion = version;
   }
 }
-Drop.prototype.changeHash = function(hash) {
-  var loc;
-  if (this.uriHasHash(get$$window().location.toString())) {
-    loc = get$$window().location.toString();
-    var pos = loc.lastIndexOf("hash=");
-    loc = loc.substring((0), pos + (5));
-    loc = ("" + loc + hash);
+Drop.prototype.changeVersion = function(version) {
+  var newLocation;
+  if (this.uriHasVersion(get$$window().location.toString())) {
+    newLocation = get$$window().location.toString();
+    var pos = newLocation.lastIndexOf($globals.Drop_versionParameter);
+    newLocation = newLocation.substring((0), pos + $globals.Drop_versionParameter.length);
+    newLocation = ("" + newLocation + version);
   }
   else {
-    loc = ("" + get$$window().location.toString() + "?hash=" + hash);
+    newLocation = ("" + get$$window().location.toString() + "?" + $globals.Drop_versionParameter + version);
   }
-  get$$window().location.assign(loc);
+  get$$window().location.assign(newLocation);
 }
-Drop.prototype.uriHasHash = function(uri) {
-  return uri.contains("hash=");
+Drop.prototype.uriHasVersion = function(uri) {
+  return uri.contains($globals.Drop_versionParameter);
 }
-Drop.prototype.hashFromUri = function(uri) {
-  var splitted = uri.split$_("hash=");
-  if (splitted.get$length() == (2)) {
-    return splitted.$index((1));
+Drop.prototype.versionFromUri = function(uri) {
+  if (this.uriHasVersion(uri)) {
+    var splitted = uri.split$_($globals.Drop_versionParameter);
+    if (splitted.get$length() == (2)) {
+      return splitted.$index((1)).substring((0), (40));
+    }
+    else {
+      return null;
+    }
   }
   else {
     return null;
   }
 }
-Drop.prototype.uriWithoutHash = function(page) {
-  if (this.uriHasHash(page)) {
-    var splitted = page.split$_("hash=");
+Drop.prototype.uriWithoutVersion = function(page) {
+  if (this.uriHasVersion(page)) {
+    var splitted = page.split$_($globals.Drop_versionParameter);
     if (splitted.$index((0)).endsWith("?")) {
-      return splitted.$index((0)).substring((0), splitted.$index((0)).get$length() - (2));
+      return splitted.$index((0)).substring((0), splitted.$index((0)).get$length() - (1));
     }
     else {
       return splitted.$index((0));
@@ -3720,32 +3753,52 @@ Drop.prototype.uriWithoutHash = function(page) {
   }
 }
 Drop.prototype.showPage = function(relativeUri, hash) {
-  var $this = this;
   if (hash == null) {
+    print$(relativeUri);
     var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + relativeUri + ".html"), $wrap_call$1((function (oh) {
-      print$(oh.get$status());
       get$$document().query("#content").set$innerHTML(oh.get$responseText());
     })
     ));
-    req.get$on().get$error().add($wrap_call$1((function (er) {
-      return $this.showError();
-    })
-    ), false);
+    req.get$on().get$error().add($wrap_call$1(this.get$showError()), false);
   }
   else {
-    https:
-    var uri = "https://raw.github.com/generateui/generateui.github.com";
-    var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + uri + "/" + hash + "/" + relativeUri + ".html"), $wrap_call$1((function (oh) {
-      print$(oh.get$status());
-      get$$document().query("#content").set$innerHTML(oh.get$responseText());
+    var ghuri = "https://api.github.com";
+    var metareq = ("repos/generateui/generateui.github.com/git/trees/" + hash);
+    var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + "/" + metareq + "?recursive=1"), $wrap_call$1((function (oh) {
+      var sha = null;
+      var data = json_JSON.parse(oh.get$responseText());
+      var $$list = data.$index("tree");
+      for (var $$i = $$list.iterator(); $$i.hasNext(); ) {
+        var item = $$i.next();
+        if ($eq$(item.$index("path"), ("" + relativeUri + ".html"))) {
+          sha = item.$index("sha");
+        }
+      }
+      var blobreq = "repos/generateui/generateui.github.com/git/blobs/";
+      var breq = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + "/" + blobreq + sha), $wrap_call$1((function (oh2) {
+        var data2 = json_JSON.parse(oh2.get$responseText());
+        var x = decode(data2.$index("content"));
+        get$$document().query("#content").set$innerHTML(x);
+      })
+      ));
     })
     ));
   }
 }
-Drop.prototype.showError = function() {
+Drop.prototype.showError = function(e) {
   var error = get$$document().query("#error");
   error.get$style().set$display("block");
   get$$document().query("#content").set$innerHTML(error.get$innerHTML());
+}
+Drop.prototype.get$showError = function() {
+  return this.showError.bind(this);
+}
+Drop.prototype.renderVersionedPage = function(e) {
+  var data = json_JSON.parse(e.data);
+  get$$document().query("#content").set$innerHTML(data);
+}
+Drop.prototype.get$renderVersionedPage = function() {
+  return this.renderVersionedPage.bind(this);
 }
 Drop.prototype.showMetaPage = function(relativeUri) {
   var $this = this;
@@ -3754,9 +3807,10 @@ Drop.prototype.showMetaPage = function(relativeUri) {
   var req = _XMLHttpRequestFactoryProvider.XMLHttpRequest$get$factory(("" + ghuri + metareq), $wrap_call$1((function (oh) {
     var data = json_JSON.parse(oh.get$responseText());
     var sb = new StringBufferImpl("");
+    sb.add("<ol>");
     for (var $$i = data.iterator(); $$i.hasNext(); ) {
       var d = $$i.next();
-      sb.add(("<h4>" + $this.escape(d.$index("commit").$index("message")) + "</h4>"));
+      sb.add(("<li class=meta><span class=meta-change-message>" + $this.escape(d.$index("commit").$index("message")) + "</span>"));
       var sdate = d.$index("commit").$index("author").$index("date");
       sdate = sdate.substring((0), (10));
       var date = DateImplementation.DateImplementation$fromString$factory(sdate);
@@ -3771,24 +3825,25 @@ Drop.prototype.showMetaPage = function(relativeUri) {
       else {
         durationString = ("" + daysago + " days ago");
       }
-      sb.add(("<p><span>" + durationString + ", </span>"));
+      sb.add(("<p class=meta><span class=meta>" + durationString + ", </span>"));
       var hashString = d.$index("sha");
       var shortHashString = hashString.substring((0), (10));
-      sb.add(("<samp class=hash id=" + hashString + ">" + shortHashString + "</samp></p><hr>"));
+      sb.add(("<samp class=\"hash meta\" id=" + hashString + ">" + shortHashString + "</samp></p></li>"));
     }
+    sb.add("</ol>");
     var mcchanges = get$$document().query("#metacontent-changes");
     mcchanges.set$innerHTML(sb.toString());
     mcchanges = get$$document().query("#metacontent-changes");
-    var $$list = mcchanges.queryAll(".hash");
+    var $$list = mcchanges.queryAll("li.meta");
     for (var $$i = $$list.iterator(); $$i.hasNext(); ) {
       var se = $$i.next();
       se.get$on().get$mouseOver().add($wrap_call$1((function (se, e) {
-        $this.changeHash(se.get$id());
+        var id = se.query$1(".hash").get$id();
+        $this.changeVersion(id);
       }).bind(null, se)
       ), false);
     }
     var sb2 = new StringBufferImpl("");
-    sb.add(("<span>Last edited " + data.$index((0)).$index("committer").$index("date") + "</span>"));
     get$$document().query("#metacontent-summary").set$innerHTML(sb2.toString());
   })
   ));
@@ -3798,6 +3853,53 @@ Drop.prototype.escape = function(html) {
   result = result.replaceAll("<", "&lt;");
   result = result.replaceAll(">", "&gt;");
   return result;
+}
+function decode(data) {
+  var result = new Array();
+  var padCount = (0);
+  var charCount = (0);
+  var value = (0);
+  for (var i = (0);
+   i < data.length; i++) {
+    var char = data.charCodeAt(i);
+    if ((65) <= char && char <= (90)) {
+      value = (value << (6)) | char - (65);
+      charCount++;
+    }
+    else if ((97) <= char && char <= (122)) {
+      value = (value << (6)) | char - (97) + (26);
+      charCount++;
+    }
+    else if ((48) <= char && char <= (57)) {
+      value = (value << (6)) | char - (48) + (52);
+      charCount++;
+    }
+    else if (char == (43)) {
+      value = (value << (6)) | (62);
+      charCount++;
+    }
+    else if (char == (47)) {
+      value = (value << (6)) | (63);
+      charCount++;
+    }
+    else if (char == (61)) {
+      value = (value << (6));
+      charCount++;
+      padCount++;
+    }
+    if (charCount == (4)) {
+      result.add((value & (16711680)) >> (16));
+      if (padCount < (2)) {
+        result.add((value & (65280)) >> (8));
+      }
+      if (padCount == (0)) {
+        result.add(value & (255));
+      }
+      charCount = (0);
+      value = (0);
+    }
+  }
+  return Strings.String$fromCharCodes$factory(result);
 }
 function main() {
   new Drop();
@@ -3839,16 +3941,18 @@ function main() {
   $dynamicSetMetadata(table);
 })();
 function $static_init(){
+  $globals.Drop_versionParameter = "version=";
 }
 var const$0000 = Object.create(_DeletedKeySentinel.prototype, {});
 var const$0001 = Object.create(NoMoreElementsException.prototype, {});
 var const$0002 = Object.create(EmptyQueueException.prototype, {});
 var const$0003 = Object.create(UnsupportedOperationException.prototype, {_message: {"value": "", writeable: false}});
-var const$0004 = new JSSyntaxRegExp("^#[_a-zA-Z]\\w*$");
-var const$0005 = new JSSyntaxRegExp("^([+-]?\\d?\\d\\d\\d\\d)-?(\\d\\d)-?(\\d\\d)(?:[ T](\\d\\d)(?::?(\\d\\d)(?::?(\\d\\d)(.\\d{1,6})?)?)? ?([zZ])?)?$");
-var const$0006 = Object.create(TimeZoneImplementation.prototype, {isUtc: {"value": true, writeable: false}});
-var const$0007 = new JSSyntaxRegExp("^\\[name=[\"'][^'\"]+['\"]\\]$");
-var const$0008 = new JSSyntaxRegExp("^[*a-zA-Z0-9]+$");
+var const$0005 = new JSSyntaxRegExp("^#[_a-zA-Z]\\w*$");
+var const$0006 = new JSSyntaxRegExp("^([+-]?\\d?\\d\\d\\d\\d)-?(\\d\\d)-?(\\d\\d)(?:[ T](\\d\\d)(?::?(\\d\\d)(?::?(\\d\\d)(.\\d{1,6})?)?)? ?([zZ])?)?$");
+var const$0007 = Object.create(TimeZoneImplementation.prototype, {isUtc: {"value": true, writeable: false}});
+var const$0008 = new JSSyntaxRegExp("^\\[name=[\"'][^'\"]+['\"]\\]$");
+var const$0009 = new JSSyntaxRegExp("^[*a-zA-Z0-9]+$");
+var $globals = {};
 $static_init();
 if (typeof window != 'undefined' && typeof document != 'undefined' &&
     window.addEventListener && document.readyState == 'loading') {
